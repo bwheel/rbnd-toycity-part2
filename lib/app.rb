@@ -10,45 +10,45 @@ def setup_files
   path = File.join(File.dirname(__FILE__), '../data/products.json')
   file = File.read(path)
   $products_hash = JSON.parse(file)
-  #$report_file = File.new("report.txt", "w+")
+  $report_file = File.new("report.txt", "w+")
 end
 
 def print_report_heading
-  puts ".oOOOo.          o                   `OooOOo.                                "
-  puts "o     o         O                     o     `o                               "
-  puts "O.              o                     O      O                            O  "
-  puts " `OOoo.         O                     o     .O                           oOo "
-  puts "      `O .oOoO' o  .oOo. .oOo         OOooOO'  .oOo. .oOo. .oOo. `OoOo.   o  "
-  puts "       o O   o  O  OooO' `Ooo.        o    o   OooO' O   o O   o  o       O  "
-  puts "O.    .O o   O  o  O         O        O     O  O     o   O o   O  O       o  "
-  puts " `oooO'  `OoO'o Oo `OoO' `OoO'        O      o `OoO' oOoO' `OoO'  o       `oO"
-  puts "                                                     O                       "
-  puts "                                                     o'                      "
+  $report_file.puts ".oOOOo.          o                   `OooOOo.                                "
+  $report_file.puts "o     o         O                     o     `o                               "
+  $report_file.puts "O.              o                     O      O                            O  "
+  $report_file.puts " `OOoo.         O                     o     .O                           oOo "
+  $report_file.puts "      `O .oOoO' o  .oOo. .oOo         OOooOO'  .oOo. .oOo. .oOo. `OoOo.   o  "
+  $report_file.puts "       o O   o  O  OooO' `Ooo.        o    o   OooO' O   o O   o  o       O  "
+  $report_file.puts "O.    .O o   O  o  O         O        O     O  O     o   O o   O  O       o  "
+  $report_file.puts " `oooO'  `OoO'o Oo `OoO' `OoO'        O      o `OoO' oOoO' `OoO'  o       `oO"
+  $report_file.puts "                                                     O                       "
+  $report_file.puts "                                                     o'                      "
 end
 
 def print_date(time)
-  puts time.strftime("%A, %B %d, %Y")
+  $report_file.puts time.strftime("%A, %B %d, %Y")
 end
 
 def print_product_heading
-  puts "                     _            _       "
-  puts "                    | |          | |      "
-  puts " _ __  _ __ ___   __| |_   _  ___| |_ ___ "
-  puts "| '_ \\| '__/ _ \\ / _` | | | |/ __| __/ __|"
-  puts "| |_) | | | (_) | (_| | |_| | (__| |_\\__ \\"
-  puts "| .__/|_|  \\___/ \\__,_|\\__,_|\\___|\\__|___/"
-  puts "| |                                       "
-  puts "|_|                                       " 
+  $report_file.puts "                     _            _       "
+  $report_file.puts "                    | |          | |      "
+  $report_file.puts " _ __  _ __ ___   __| |_   _  ___| |_ ___ "
+  $report_file.puts "| '_ \\| '__/ _ \\ / _` | | | |/ __| __/ __|"
+  $report_file.puts "| |_) | | | (_) | (_| | |_| | (__| |_\\__ \\"
+  $report_file.puts "| .__/|_|  \\___/ \\__,_|\\__,_|\\___|\\__|___/"
+  $report_file.puts "| |                                       "
+  $report_file.puts "|_|                                       " 
 end
 
 def print_brand_heading
-	puts " _                         _     "
-	puts "| |                       | |    "
-	puts "| |__  _ __ __ _ _ __   __| |___ "
-	puts "| '_ \\| '__/ _` | '_ \\ / _` / __|"
-	puts "| |_) | | | (_| | | | | (_| \\__ \\"
-	puts "|_.__/|_|  \\__,_|_| |_|\\__,_|___/"
-	puts
+	$report_file.puts " _                         _     "
+	$report_file.puts "| |                       | |    "
+	$report_file.puts "| |__  _ __ __ _ _ __   __| |___ "
+	$report_file.puts "| '_ \\| '__/ _` | '_ \\ / _` / __|"
+	$report_file.puts "| |_) | | | (_| | | | | (_| \\__ \\"
+	$report_file.puts "|_.__/|_|  \\__,_|_| |_|\\__,_|___/"
+	$report_file.puts
 end
 
 def print_heading
@@ -59,12 +59,14 @@ def print_heading
   print_date(Time.now)
 
   # Print "Products" in ascii art
-  print_brand_heading
+  print_product_heading
 end
 
 def print_data
   # First we generate the information for the products.
   make_products_section
+  
+  print_brand_heading
   
   # Finally we generate the information for the brands  
   make_brands_section
@@ -76,31 +78,19 @@ def create_report
   
   print_data
   
-# For each product in the data set:
-	# Print the name of the toy
-	# Print the retail price of the toy
-	# Calculate and print the total number of purchases
-	# Calculate and print the total amount of sales
-	# Calculate and print the average price the toy sold for
-	# Calculate and print the average discount (% or $) based off the average sales price
-
-# Print "Brands" in ascii art
-
-# For each brand in the data set:
-	# Print the name of the brand
-	# Count and print the number of the brand's toys we stock
-	# Calculate and print the average price of the brand's toys
-	# Calculate and print the total sales volume of all the brand's toys combined
-
+#
 end
 
 def print_text(txt)
-  puts txt
+  $report_file.puts txt
 end
 def print_money(val)
-  puts "$#{val}"
+  $report_file.puts "$#{val}"
 end
 
+def print_line_break
+  $report_file.puts
+end
 def make_products_section
   # For each product in the data set:
   $products_hash["items"].each do |toy|
@@ -130,6 +120,8 @@ def make_products_section
     discount = retail_Price.to_f  - average_price
     print_money(discount.round(2))
     
+    #add a line here for readability
+    print_line_break
   end
 
 end
@@ -142,7 +134,7 @@ def make_brands_section
 # For each brand in the data set:
   brands.each do |brand| 
     
-    puts "Brand #{brand}"
+    $report_file.puts "Brand #{brand}"
     
     brand_toys = $products_hash["items"].select { |toy| toy["brand"] == brand}
     
@@ -171,6 +163,8 @@ def make_brands_section
     end
     print_money(total_revenue.round(2))
     
+    # add a line here for readability
+    print_line_break
   end
 end
 
