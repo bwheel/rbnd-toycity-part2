@@ -8,7 +8,7 @@ O.    .O o   O  o  O         O        O     O  O     o   O o   O  O       o
  `oooO'  `OoO'o Oo `OoO' `OoO'        O      o `OoO' oOoO' `OoO'  o       `oO
                                                      O                       
                                                      o'                      
-Wednesday, May 04, 2016
+Thursday, May 05, 2016
                      _            _       
                     | |          | |      
  _ __  _ __ ___   __| |_   _  ___| |_ ___ 
@@ -17,26 +17,26 @@ Wednesday, May 04, 2016
 | .__/|_|  \___/ \__,_|\__,_|\___|\__|___/
 | |                                       
 |_|                                       
-LEGO Iron Man vs. Ultron
-$22.99
-2
-$36.98
-$18.49
-$4.5
+Title: LEGO Iron Man vs. Ultron
+Retail Price: $22.99
+Number Purchased: 2
+Total Sales: $36.98
+Average Price: $18.49
+Discount: $4.5
 
-Nano Block Empire State Building
-$49.99
-2
-$68.98
-$34.49
-$15.5
+Title: Nano Block Empire State Building
+Retail Price: $49.99
+Number Purchased: 2
+Total Sales: $68.98
+Average Price: $34.49
+Discount: $15.5
 
-LEGO Firehouse Headquarters
-$199.99
-2
-$379.98
-$189.99
-$10.0
+Title: LEGO Firehouse Headquarters
+Retail Price: $199.99
+Number Purchased: 2
+Total Sales: $379.98
+Average Price: $189.99
+Discount: $10.0
 
  _                         _     
 | |                       | |    
@@ -45,13 +45,13 @@ $10.0
 | |_) | | | (_| | | | | (_| \__ \
 |_.__/|_|  \__,_|_| |_|\__,_|___/
 
-Brand LEGO
-55
-$4.05
-$416.96
+Brand: LEGO
+Stock: 55
+Average Price: $111.49
+Revenue: $416.96
 
-Brand Nano Blocks
-12
-$4.17
-$68.98
+Brand: Nano Blocks
+Stock: 12
+Average Price: $49.99
+Revenue: $68.98
 

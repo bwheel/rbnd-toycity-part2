@@ -1,0 +1,17 @@
+commit 27556f0591acd1630e3c5beb34f1c34426c18df7
+Author: bwheel1990 <bwheel1990@gmail.com>
+Date:   Wed May 4 01:33:08 2016 +0000
+
+    Implement the writing to file and formatting
+
+commit 73c33344ad4cb65f5266e17545c1947a53c0e87d
+Author: bwheel1990 <bwheel1990@gmail.com>
+Date:   Wed May 4 01:12:54 2016 +0000
+
+    Build out functions, and copied over code from previous project
+
+commit 28af0e9a2d82a8c1bd9dbaf939b16762d15261f1
+Author: bwheel1990 <bwheel1990@gmail.com>
+Date:   Wed May 4 00:26:00 2016 +0000
+
+    Initial Commit

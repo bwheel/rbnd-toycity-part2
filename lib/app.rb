@@ -81,44 +81,131 @@ def create_report
 #
 end
 
-def print_text(txt)
-  $report_file.puts txt
+
+def print_title(txt)
+  $report_file.puts "Title: #{txt}"
 end
-def print_money(val)
-  $report_file.puts "$#{val}"
+
+def print_retail_price(txt)
+  $report_file.puts "Retail Price: $#{txt}"
+end
+
+def print_num_purchased(txt)
+  $report_file.puts "Number Purchased: #{txt}"
+end
+
+def print_total_sales(txt)
+  $report_file.puts "Total Sales: $#{txt}"
+end
+
+def print_average_price(txt)
+  $report_file.puts "Average Price: $#{txt}"
+end
+
+def print_discount(txt)
+  $report_file.puts "Discount: $#{txt}"
+end
+
+def print_brand(txt)
+  $report_file.puts "Brand: #{txt}"
+end
+
+def print_brand_stock(txt)
+  $report_file.puts "Stock: #{txt}"
+end
+
+def print_average_brand_price(txt)
+  $report_file.puts "Average Price: $#{txt}"
+end
+
+def print_brand_revenue(txt)
+  $report_file.puts "Revenue: $#{txt}"
 end
 
 def print_line_break
   $report_file.puts
 end
+
+def calc_number_purchased(toy)
+  toy["purchases"].length
+end
+
+def calc_total_sales(toy)
+  return toy["purchases"].inject(0) do |sum, purchase|
+    sum + purchase["price"]
+  end
+end
+
+def calc_average_price(total_price, num_Purchased)
+  total_price/num_Purchased
+end
+
+def calc_discount(retail_Price, average_price)
+  (retail_Price.to_f  - average_price).round(2)
+end
+
+def calc_brands
+  $products_hash["items"].map { |item| item["brand"]}.uniq
+end
+
+def calc_brand_toys(brand)
+  $products_hash["items"].select { |toy| toy["brand"] == brand}
+end
+
+def calc_stock(brand_toys)
+  stock = 0
+  brand_toys.each do |toy|
+    stock += toy["stock"].to_i
+  end
+  return stock
+end
+
+def calc_average_brand_price( brand_toys)
+  toy_price = 0
+  brand_toys.each do |toy|
+    toy_price += toy["full-price"].to_f
+  end
+  return (toy_price/brand_toys.length).round(2)
+  
+end
+
+def calc_brand_revenue(brand_toys)
+  
+  total_revenue = 0.0
+  brand_toys.each do |toy|
+    toy["purchases"].each do |purchase|
+      total_revenue += purchase["price"].to_f
+    end 
+  end
+  
+  return total_revenue.round(2)
+end
+
 def make_products_section
   # For each product in the data set:
   $products_hash["items"].each do |toy|
 
     # Print the name of the toy
-    print_text (toy["title"])
+    print_title(toy["title"])
 
     # Print the retail price of the toy
     retail_Price = toy["full-price"]
-    print_money(retail_Price)
+    print_retail_price(retail_Price)
     
     # Calculate and print the total number of purchases
-    num_Purchased = toy["purchases"].length
-    print_text(num_Purchased)
+    num_purchased = calc_number_purchased(toy)
+    print_num_purchased(num_purchased)
     
     # Calculate and print the total amount of sales
-    total_price = toy["purchases"].inject(0) do |sum, purchase|
-      sum + purchase["price"]
-    end
-    print_money(total_price)
+    total_sales = calc_total_sales(toy) 
+    print_total_sales(total_sales)
     
     # Calculate and print the average price the toy sold for
-    average_price = total_price/num_Purchased
-    print_money(average_price)
+    average_price = calc_average_price(total_sales, num_purchased)
+    print_average_price(average_price)
     
     # Calculate and print the average discount (% or $) based off the average sales price
-    discount = retail_Price.to_f  - average_price
-    print_money(discount.round(2))
+    print_discount(calc_discount(retail_Price, average_price))
     
     #add a line here for readability
     print_line_break
@@ -129,39 +216,23 @@ end
 def make_brands_section
   
   #Get the specific brands
-  brands =  $products_hash["items"].map { |item| item["brand"]}.uniq
+  brands =  calc_brands
   
 # For each brand in the data set:
   brands.each do |brand| 
     
-    $report_file.puts "Brand #{brand}"
+    print_brand(brand)
     
-    brand_toys = $products_hash["items"].select { |toy| toy["brand"] == brand}
+    brand_toys = calc_brand_toys(brand)
     
     # Count and print the number of the brand's toys we stock
-    stock = 0
-    brand_toys.each do |toy|
-      stock += toy["stock"].to_i
-    end
-    print_text(stock)
+    print_brand_stock(calc_stock(brand_toys))
     
-    toy_price = 0.0
     # Calculate and print the average price of the brand's toys
-    brand_toys.each do |toy|
-      toy_price += toy["full-price"].to_f
-    end
-    print_money((toy_price/stock).round(2))
+    print_average_brand_price(calc_average_brand_price(brand_toys))
     
-    total_revenue = 0.0
     # Calculate and print the total revenue of all the brand's toy sales combined
-    brand_toys.each do |toy|
-      
-      toy["purchases"].each do |purchase|
-        total_revenue += purchase["price"].to_f
-      end 
-      
-    end
-    print_money(total_revenue.round(2))
+    print_brand_revenue(calc_brand_revenue(brand_toys))
     
     # add a line here for readability
     print_line_break
